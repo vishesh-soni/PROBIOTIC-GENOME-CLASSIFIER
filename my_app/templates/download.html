@@ -1,0 +1,110 @@
+<!-- your_template.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Download CSV</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #ffffff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            margin-top: 50px;
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border: 1px solid #ddd; /* Light gray border */
+        }
+
+        th {
+            background-color: #f2f2f2; /* Light gray background for header */
+        }
+
+        .download-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+        }
+
+        button {
+            margin-top: 10px;
+            padding: 10px;
+            background-color: #4CAF50; /* Green */
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #45a049; /* Darker green on hover */
+        }
+
+        .download-info {
+            display: none;
+            position: absolute;
+            top: -50px;
+            background-color: #3498db; /* Blue background */
+            padding: 15px;
+            border-radius: 20px; /* Adjust the value to make it look more like a cloud */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            font-size: 14px;
+            font-weight: bold;
+            color: #fff; /* White text color */
+            text-align: center;
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .download-container:hover .download-info {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container mt-4">
+        <h2>Table of First Five Columns of list of value counts of Kmers</h2>
+
+        <!-- Render the HTML table -->
+        {{ table_html|safe }}
+
+    </div>
+
+    <div class="container mt-4 download-container">
+        {% if file_path %}
+            <a href="{{ file_path }}" download="output.csv">
+                <button>Download CSV</button>
+                <p class="download-info">Click to download the CSV file.</p>
+            </a>
+        {% else %}
+            <p>No file available for download.</p>
+        {% endif %}
+    </div>
+
+</body>
+</html>
